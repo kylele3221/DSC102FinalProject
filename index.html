@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Moving Monsoon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Rain layer -->
+    <div class="rain"></div>
 
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>The Moving Monsoon</h1>
+        <p>How climate change shifts the rainfall rhythms of billions.</p>
+        <div class="scroll-hint">
+          <span>Scroll to explore</span>
+          <div class="scroll-arrow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IS A MONSOON? -->
+    <section id="monsoon-intro" class="section section-monsoon">
+      <div class="monsoon-grid">
+        <!-- LEFT: text -->
+        <div class="monsoon-text">
+          <h2>What is a monsoon?</h2>
+          <p class="monsoon-lede">
+            Monsoons are seasonal wind and rainfall patterns that bring
+            life-sustaining rains to large parts of the world.
+          </p>
+
+          <div class="monsoon-steps">
+            <div class="monsoon-step" data-monsoon="ISM">
+              <h3>Indian Summer Monsoon (ISM)</h3>
+              <p>
+                Each summer, moist winds rush inland from the Indian Ocean,
+                bringing intense rains to South Asia between about 5°N and 35°N,
+                from 60°E to 100°E.
+              </p>
+            </div>
+
+            <div class="monsoon-step" data-monsoon="WAM">
+              <h3>West African Monsoon (WAM)</h3>
+              <p>
+                Over West Africa, the monsoon delivers rainfall to the Sahel,
+                from roughly 5°N to 20°N and 20°W to 20°E, sustaining crops and
+                river systems.
+              </p>
+            </div>
+
+            <div class="monsoon-step" data-monsoon="SAMS">
+              <h3>South American Monsoon (SAMS)</h3>
+              <p>
+                In South America, the monsoon system spans the Amazon and
+                central Brazil, between about 5°N and 25°S, and 70°W to 35°W,
+                shaping one of the world’s largest rainforest regions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: globe -->
+        <div class="monsoon-globe-wrapper">
+          <div id="monsoon-globe"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Libraries then your script -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.45.0/dist/globe.gl.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

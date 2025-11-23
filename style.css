@@ -1,0 +1,240 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #020824;
+  --navy-soft: #050d2b;
+  --rain-light: rgba(173, 216, 230, 0.8);
+  --rain-dim: rgba(173, 216, 230, 0.2);
+  --text-main: #f5f7ff;
+  --text-subtle: #a9b3ff;
+  --accent: #9ee7ff;
+  --accent-strong: #ffb347;
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-main);
+  background: radial-gradient(circle at top, #071235 0, var(--navy) 40%);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* generic section padding */
+.section {
+  position: relative;
+  padding: 5rem clamp(1.5rem, 5vw, 4rem);
+}
+
+/* RAIN */
+.rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 1;
+}
+
+.raindrop {
+  position: absolute;
+  top: -10vh;
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--rain-light), var(--rain-dim));
+  opacity: 0.8;
+  filter: blur(0.3px);
+  animation: fall 2.5s linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate3d(0, -120vh, 0);
+  }
+  100% {
+    transform: translate3d(0, 120vh, 0);
+  }
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-content {
+  max-width: 800px;
+  animation: fadeIn 1.4s ease-out forwards;
+  opacity: 0;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.7rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--accent);
+}
+
+/* Scroll hint */
+.scroll-hint {
+  margin-top: 2.5rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  opacity: 0.85;
+}
+
+.scroll-arrow {
+  width: 14px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid var(--text-subtle);
+  position: relative;
+}
+
+.scroll-arrow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  width: 4px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--text-subtle);
+  transform: translateX(-50%);
+  animation: scrollDot 1.4s infinite ease-in-out;
+}
+
+@keyframes scrollDot {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, 6px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MONSOON SECTION */
+.section-monsoon {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, var(--navy-soft), #010413);
+}
+
+.monsoon-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+/* text column */
+.monsoon-text h2 {
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  margin-bottom: 0.8rem;
+}
+
+.monsoon-lede {
+  color: var(--text-subtle);
+  margin-bottom: 2rem;
+  max-width: 32rem;
+}
+
+.monsoon-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.monsoon-step {
+  padding: 1.4rem 1.2rem;
+  border-radius: 0.9rem;
+  background: rgba(11, 19, 55, 0.9);
+  border: 1px solid rgba(158, 231, 255, 0.08);
+  transition: border 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.monsoon-step h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.monsoon-step p {
+  font-size: 0.9rem;
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+
+.monsoon-step.is-active {
+  border-color: var(--accent-strong);
+  background: rgba(15, 31, 80, 0.95);
+  transform: translateY(-2px);
+}
+
+/* GLOBE COLUMN – BIG 2D-ISH GLOBE */
+.monsoon-globe-wrapper {
+  min-height: 560px;
+  height: clamp(560px, 80vh, 780px);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#monsoon-globe {
+  width: 100%;
+  height: 100%;
+}
+
+/* responsive */
+@media (max-width: 880px) {
+  .monsoon-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .monsoon-globe-wrapper {
+    order: -1;
+    margin-bottom: 2.5rem;
+  }
+
+  .section {
+    padding-top: 3rem;
+  }
+}
