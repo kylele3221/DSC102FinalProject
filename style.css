@@ -326,3 +326,90 @@ body {
   }
 }
 
+.radial-block {
+  margin-bottom: 3.5rem;
+  background: rgba(11, 19, 55, 0.9);
+  border: 1px solid rgba(158, 231, 255, 0.12);
+  padding: 1.8rem 1.5rem;
+  border-radius: 1rem;
+}
+
+.radial-description {
+  color: var(--text-subtle);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  max-width: 40rem;
+}
+
+.radial-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.radial-year-label {
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+#ism-year-slider {
+  flex: 1;
+  min-width: 150px;
+}
+
+#ism-play {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+#ism-play:hover {
+  background: var(--accent);
+  color: var(--navy);
+}
+
+.radial-svg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ism-radial-svg {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+}
+
+/* SVG styling */
+.radial-ring {
+  fill: none;
+  stroke: rgba(158, 231, 255, 0.18);
+  stroke-width: 0.6;
+}
+
+.radial-spoke {
+  stroke: rgba(158, 231, 255, 0.35);
+  stroke-width: 0.4;
+}
+
+.radial-month-label {
+  fill: var(--text-subtle);
+  font-size: 0.7rem;
+  text-anchor: middle;
+}
+
+.radial-path {
+  fill: rgba(255, 179, 71, 0.25);
+  stroke: var(--accent-strong);
+  stroke-width: 1.6;
+}
+
+.radial-dot {
+  fill: var(--accent-strong);
+}
