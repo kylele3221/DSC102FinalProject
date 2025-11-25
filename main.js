@@ -203,3 +203,165 @@ mat.specular = new THREE.Color("#000000");
   // Initial state
   focusMonsoon("ISM", false);
 });
+
+function initIsmRadial() {
+  const svg = document.getElementById("ism-radial-svg");
+  const slider = document.getElementById("ism-year-slider");
+  const label = document.getElementById("ism-year-label");
+  const playBtn = document.getElementById("ism-play");
+  if (!svg || !slider || !label || !playBtn) return;
+  const NS = "http://www.w3.org/2000/svg";
+  const width = 400;
+  const height = 400;
+  const cx = width / 2;
+  const cy = height / 2;
+  const maxR = 140;
+  svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+  let dataByYear = {};
+  let years = [];
+  let maxPr = 0;
+
+  function parseCsv(text) {
+    const lines = text.trim().split(/\r?\n/);
+    const header = lines.shift().split(",");
+    const yearIdx = header.indexOf("year");
+    const monthIdx = header.indexOf("month");
+    const prIdx = header.indexOf("pr");
+    lines.forEach((line) => {
+      if (!line) return;
+      const cols = line.split(",");
+      const y = parseInt(cols[yearIdx], 10);
+      const m = parseInt(cols[monthIdx], 10);
+      const pr = parseFloat(cols[prIdx]);
+      if (!dataByYear[y]) dataByYear[y] = {};
+      dataByYear[y][m] = pr;
+      if (!years.includes(y)) years.push(y);
+      if (!isNaN(pr) && pr > maxPr) maxPr = pr;
+    });
+    years.sort((a, b) => a - b);
+  }
+
+  function createAxes() {
+    const axesGroup = document.createElementNS(NS, "g");
+    axesGroup.setAttribute("class", "radial-axes");
+    const rings = 4;
+    for (let r = 1; r <= rings; r++) {
+      const circle = document.createElementNS(NS, "circle");
+      circle.setAttribute("cx", cx);
+      circle.setAttribute("cy", cy);
+      circle.setAttribute("r", (maxR * r) / rings);
+      circle.setAttribute("class", "radial-ring");
+      axesGroup.appendChild(circle);
+    }
+    const monthLabels = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+      const x2 = cx + maxR * Math.cos(angle);
+      const y2 = cy + maxR * Math.sin(angle);
+      const line = document.createElementNS(NS, "line");
+      line.setAttribute("x1", cx);
+      line.setAttribute("y1", cy);
+      line.setAttribute("x2", x2);
+      line.setAttribute("y2", y2);
+      line.setAttribute("class", "radial-spoke");
+      axesGroup.appendChild(line);
+      const lx = cx + (maxR + 16) * Math.cos(angle);
+      const ly = cy + (maxR + 16) * Math.sin(angle) + 4;
+      const text = document.createElementNS(NS, "text");
+      text.setAttribute("x", lx);
+      text.setAttribute("y", ly);
+      text.setAttribute("class", "radial-month-label");
+      text.textContent = monthLabels[i];
+      axesGroup.appendChild(text);
+    }
+    svg.appendChild(axesGroup);
+  }
+
+  const dataGroup = document.createElementNS(NS, "g");
+  dataGroup.setAttribute("class", "radial-data");
+  const path = document.createElementNS(NS, "path");
+  path.setAttribute("class", "radial-path");
+  const dotsGroup = document.createElementNS(NS, "g");
+  dotsGroup.setAttribute("class", "radial-dots");
+  dataGroup.appendChild(path);
+  dataGroup.appendChild(dotsGroup);
+  svg.appendChild(dataGroup);
+
+  function drawYear(year) {
+    const months = dataByYear[year];
+    if (!months) return;
+    label.textContent = year;
+    let d = "";
+    const points = [];
+    dotsGroup.innerHTML = "";
+    for (let i = 0; i < 12; i++) {
+      const m = i + 1;
+      const pr = months[m] || 0;
+      const r = maxPr ? (pr / maxPr) * maxR : 0;
+      const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      points.push([x, y]);
+      const dot = document.createElementNS(NS, "circle");
+      dot.setAttribute("cx", x);
+      dot.setAttribute("cy", y);
+      dot.setAttribute("r", 3);
+      dot.setAttribute("class", "radial-dot");
+      dotsGroup.appendChild(dot);
+    }
+    points.forEach((p, idx) => {
+      d += (idx === 0 ? "M" : "L") + p[0] + " " + p[1] + " ";
+    });
+    d += "Z";
+    path.setAttribute("d", d.trim());
+  }
+
+  let playTimer = null;
+  function startPlay() {
+    if (playTimer || years.length === 0) return;
+    playBtn.textContent = "Pause";
+    playTimer = setInterval(() => {
+      const currentYear = parseInt(slider.value, 10);
+      const idx = years.indexOf(currentYear);
+      const nextYear = years[(idx + 1) % years.length];
+      slider.value = nextYear;
+      drawYear(nextYear);
+    }, 900);
+  }
+
+  function stopPlay() {
+    if (!playTimer) return;
+    clearInterval(playTimer);
+    playTimer = null;
+    playBtn.textContent = "Play";
+  }
+
+  slider.addEventListener("input", () => {
+    stopPlay();
+    const y = parseInt(slider.value, 10);
+    drawYear(y);
+  });
+
+  playBtn.addEventListener("click", () => {
+    if (playTimer) {
+      stopPlay();
+    } else {
+      startPlay();
+    }
+  });
+
+  fetch("ISM_historic.csv")
+    .then((res) => res.text())
+    .then((text) => {
+      parseCsv(text);
+      if (years.length === 0) return;
+      slider.min = years[0];
+      slider.max = years[years.length - 1];
+      slider.value = years[0];
+      createAxes();
+      drawYear(years[0]);
+    })
+    .catch(() => {});
+}
+
+window.addEventListener("load", initIsmRadial);
