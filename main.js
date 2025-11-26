@@ -105,7 +105,7 @@ window.addEventListener("load", () => {
   const mat = worldGlobe.globeMaterial();
   mat.color = new THREE.Color("#6aa0ff"); // light blue tint
   mat.emissive = new THREE.Color("#1a2e6f"); // soft navy glow
-  mat.emissiveIntensity = 0.4;
+  mat.emissiveIntensity = 0.55;
   mat.specular = new THREE.Color("#000000");
 
   // Big clickable points for each monsoon
@@ -113,11 +113,31 @@ window.addEventListener("load", () => {
     .pointsData(monsoonPoints)
     .pointLat("lat")
     .pointLng("lng")
-    .pointAltitude(0.08)
-    .pointRadius(0.75)
-    .pointColor((d) => d.color)
+    .pointAltitude(0.16)
+    .pointRadius(1)
+    .pointColor(d => d.color)
     .pointResolution(32)
-    .pointLabel((d) => d.name);
+    .pointLabel(d => d.name);
+
+  worldGlobe
+  .ringsData(monsoonPoints)
+  .ringLat("lat")
+  .ringLng("lng")
+  .ringAltitude(0.01)
+  .ringMaxRadius(1.6) // how far the glow spreads
+  .ringPropagationSpeed(1.5)
+  .ringRepeatPeriod(1300)
+  .ringColor(d => t => {
+    // define RGB based on monsoon ID
+    const colors = {
+      ISM: "255, 179, 71",   // orange
+      WAM: "255, 107, 107",  // reddish pink
+      SAMS: "158, 231, 255"  // light blue
+    };
+    const rgb = colors[d.id] || "255,255,255";
+    const alpha = 0.7 * (1 - t); // fade out as t increases
+    return `rgba(${rgb}, ${alpha})`;
+  });
 
   // Initial view
   const INITIAL_ALT = 1.35;
@@ -176,7 +196,7 @@ window.addEventListener("load", () => {
     );
 
     worldGlobe.pointAltitude((d) =>
-      d.id === activeMonsoonId ? 0.13 : 0.08
+      d.id === activeMonsoonId ? 0.22 : 0.16
     );
 
     setActiveCard(id);
