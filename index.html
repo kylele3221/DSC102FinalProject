@@ -11,7 +11,7 @@
     <div class="rain"></div>
 
     <!-- Top-right Writeup button -->
-     <a href="#writeup" class="writeup-button">Writeup</a>
+    <a href="#writeup" class="writeup-button">Writeup</a>
 
     <!-- HERO -->
     <section class="hero">
@@ -73,10 +73,9 @@
       </div>
     </section>
 
-    <!-- CLIMATE CHANGE & RAINFALL SHIFT -->
+    <!-- CLIMATE CHANGE & RAINFALL SHIFT: RADIAL PLOTS ONLY -->
     <section id="climate-impact" class="section section-climate">
       <div class="climate-wrapper">
-
         <!-- HISTORIC RADIAL: ISM + WAM + SAM -->
         <div id="ism-radial-block" class="radial-block">
           <h3>Historic Monsoon Rainfall Cycle (Monsoon Regions)</h3>
@@ -151,74 +150,208 @@
             <svg id="ism-future-radial-svg"></svg>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- ORIGINAL TEXT CONTENT -->
-        <h2>Well, Why Does this Even Matter?</h2>
-        <p class="climate-intro">
-          According to NASA's Global Precipitation Measurement, rising temperatures intensify the
-          Earth's water cycle. Increased evaporation fuels more frequent and intense storms in some
-          regions, while drying others—meaning <strong>wet areas get wetter, and dry areas get drier</strong>.
-          These shifts significantly impact agriculture, flooding, and global water security.
-        </p>
-    
-        <!-- AGRICULTURE -->
-        <div class="impact-block">
-          <h3>1. Agriculture: Increasingly Unpredictable and Vulnerable</h3>
-    
-          <h4>In Wet Regions</h4>
-          <ul>
-            <li><strong>Flooded fields:</strong> Excess water drowns crops and damages roots</li>
-            <li><strong>Soil erosion:</strong> Heavy rainfall strips away fertile topsoil</li>
-            <li><strong>Plant diseases:</strong> Warm, humid conditions promote fungal outbreaks</li>
-            <li><strong>Crop yield instability:</strong> Farmers face more frequent losses from storm damage</li>
-          </ul>
-    
-          <h4>In Dry Regions</h4>
-          <ul>
-            <li><strong>Drought stress:</strong> Insufficient water reduces crop yields</li>
-            <li><strong>Reduced soil moisture:</strong> Dry, compacted soil becomes less productive</li>
-            <li><strong>Shifting crop zones:</strong> Some crops can no longer grow in former regions</li>
-            <li><strong>Higher irrigation demand:</strong> Farmers forced to rely more on groundwater or rivers that may also be shrinking</li>
-          </ul>
+    <!-- FULL-WIDTH SCROLLY RESEARCH SECTION -->
+    <section id="impact-research" class="section section-impact">
+      <div class="impact-scrolly">
+        <!-- Sticky viewport with full-screen slides -->
+        <div class="impact-viewport">
+          <!-- Slide 0: overview -->
+          <div class="impact-card is-active" data-slide="0">
+            <h2>Well, Why Does this Even Matter?</h2>
+            <p class="impact-intro">
+              As the planet warms, the water cycle speeds up. Wet regions can
+              get even wetter while dry regions dry out, reshaping where and
+              when rain falls. For people living under monsoon skies, that
+              doesn’t just change the weather — it changes harvests, flooding,
+              and who has reliable access to drinking water.
+            </p>
+          </div>
+
+          <!-- Slide 1: Agriculture -->
+          <div class="impact-card" data-slide="1">
+            <h3>1. Agriculture: Increasingly Unpredictable and Vulnerable</h3>
+            <p class="impact-subtitle">
+              Monsoon timing and intensity decide whether fields thrive or fail.
+            </p>
+
+            <div class="impact-metrics">
+              <div class="metric-box">
+                <h4>In Wet Regions</h4>
+                <ul>
+                  <li>
+                    <strong>Flooded fields:</strong> Excess water drowns crops
+                    and damages roots.
+                  </li>
+                  <li>
+                    <strong>Soil erosion:</strong> Heavy rainfall strips away
+                    fertile topsoil.
+                  </li>
+                  <li>
+                    <strong>Plant diseases:</strong> Warm, humid conditions
+                    promote fungal outbreaks.
+                  </li>
+                  <li>
+                    <strong>Yield instability:</strong> Storm damage makes
+                    harvests harder to predict.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="metric-box">
+                <h4>In Dry Regions</h4>
+                <ul>
+                  <li>
+                    <strong>Drought stress:</strong> Too little rain shrinks
+                    yields.
+                  </li>
+                  <li>
+                    <strong>Reduced soil moisture:</strong> Dry, compacted soil
+                    becomes less productive.
+                  </li>
+                  <li>
+                    <strong>Shifting crop zones:</strong> Some crops can no
+                    longer grow where they used to.
+                  </li>
+                  <li>
+                    <strong>More irrigation:</strong> Farmers lean on
+                    groundwater and rivers that may also be shrinking.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Flooding -->
+          <div class="impact-card" data-slide="2">
+            <h3>2. Flooding: More Extreme Where Rain Increases</h3>
+            <p class="impact-subtitle">
+              Stronger downpours turn familiar rivers and streets into hazards.
+            </p>
+
+            <div class="impact-metrics">
+              <div class="metric-box">
+                <h4>In Wet Areas</h4>
+                <ul>
+                  <li>
+                    <strong>Intense rainstorms:</strong> Huge volumes fall in
+                    just hours.
+                  </li>
+                  <li>
+                    <strong>River overflow:</strong> River basins flood more
+                    often and more severely.
+                  </li>
+                  <li>
+                    <strong>Urban flooding:</strong> Stormwater systems get
+                    overwhelmed.
+                  </li>
+                  <li>
+                    <strong>Coastal “compound” floods:</strong> Heavy rain
+                    stacks on top of higher seas.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="metric-box">
+                <h4>In Drier Landscapes</h4>
+                <ul>
+                  <li>
+                    <strong>Flash floods:</strong> Hard, dry soils absorb water
+                    poorly, so rare storms create sudden floods.
+                  </li>
+                  <li>
+                    <strong>Overall trend:</strong> Chronic river flooding
+                    decreases while drought becomes the main threat.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Water Security -->
+          <div class="impact-card" data-slide="3">
+            <h3>3. Water Security: Too Much in Some Places, Too Little in Others</h3>
+            <p class="impact-subtitle">
+              The same shifting monsoon can cause floods upstream and empty taps
+              downstream.
+            </p>
+
+            <div class="impact-metrics">
+              <div class="metric-box">
+                <h4>In Wet Regions</h4>
+                <ul>
+                  <li>
+                    <strong>Inconsistent supply:</strong> Long dry spells
+                    punctuated by huge storms.
+                  </li>
+                  <li>
+                    <strong>Contamination risks:</strong> Floods mix sewage and
+                    pollutants into drinking water.
+                  </li>
+                  <li>
+                    <strong>Infrastructure stress:</strong> Reservoirs and dams
+                    face overflow and safety concerns.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="metric-box">
+                <h4>In Dry Regions</h4>
+                <ul>
+                  <li>
+                    <strong>Chronic shortages:</strong> Less rain and more
+                    evaporation dry rivers, lakes, and aquifers.
+                  </li>
+                  <li>
+                    <strong>Groundwater depletion:</strong> People pump more
+                    than nature can refill.
+                  </li>
+                  <li>
+                    <strong>Rising competition:</strong> Cities, farms, and
+                    ecosystems all fight for the same water.
+                  </li>
+                  <li>
+                    <strong>Migration pressure:</strong> Water stress can push
+                    communities to move.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-    
-        <!-- FLOODING -->
-        <div class="impact-block">
-          <h3>2. Flooding: More Extreme and More Common Where Rain Increases</h3>
-    
-          <h4>In Wet Areas</h4>
-          <ul>
-            <li><strong>Intense rainstorms:</strong> Intense rainstorms dump large volumes of water quickly</li>
-            <li><strong>River overflow:</strong> River basins flood more often</li>
-            <li><strong>Urban flooding:</strong> Stormwater systems become overwhelmed</li>
-            <li><strong>Coastal compound flooding:</strong> Heavy rain combines with rising sea-levels</li>
-          </ul>
-    
-          <h4>In Dry Regions</h4>
-          <ul>
-            <li><strong>Flash flooding:</strong> Hard, dry soils absorb water poorly, causing sudden floods during rare storms</li>
-            <li><strong>Overall trend:</strong> Chronic flooding decreases, while drought becomes dominant</li>
-          </ul>
+
+        <!-- Scroll steps that drive which slide is active -->
+        <div class="impact-scroll-steps">
+          <div class="impact-step" data-slide="0"></div>
+          <div class="impact-step" data-slide="1"></div>
+          <div class="impact-step" data-slide="2"></div>
+          <div class="impact-step" data-slide="3"></div>
         </div>
-    
-        <!-- WATER SECURITY -->
-        <div class="impact-block">
-          <h3>3. Water Security: Too Much Water in Some Places, Too Little in Others</h3>
-    
-          <h4>In Wet Regions</h4>
-          <ul>
-            <li><strong>Inconsistent water supply:</strong> Water supply becomes inconsistent (long dry spells punctuated by huge storms)</li>
-            <li><strong>Contamination risks:</strong> Floods contaminate drinking water with sewage or pollutants</li>
-            <li><strong>Infrastructure stress:</strong> Reservoirs and dams face overflow risks</li>
-          </ul>
-    
-          <h4>In Dry Regions</h4>
-          <ul>
-            <li><strong>Chronic shortages:</strong> ess rainfall and higher evaporation dry out rivers, lakes, and aquifers</li>
-            <li><strong>Groundwater depletion:</strong> People resort to pumping more groundwater than nature can replenish</li>
-            <li><strong>Increased competition:</strong> Agriculture, cities, and ecosystems vie for limited water</li>
-            <li><strong>Migration pressures:</strong> Water scarcity may force communities to relocate</li>
-          </ul>
+
+        <!-- Dots at bottom of research section -->
+        <div class="impact-dots">
+          <button
+            class="impact-dot is-active"
+            data-slide="0"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            class="impact-dot"
+            data-slide="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            class="impact-dot"
+            data-slide="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            class="impact-dot"
+            data-slide="3"
+            aria-label="Slide 4"
+          ></button>
         </div>
       </div>
     </section>

@@ -396,7 +396,55 @@ function createRadialChartMulti(config) {
     .catch((e) => console.error("Error loading radial CSVs:", e));
 }
 
-// separate load listener just for the charts
+function initImpactScrolly() {
+  const cards = document.querySelectorAll(".impact-viewport .impact-card");
+  const steps = document.querySelectorAll(".impact-scroll-steps .impact-step");
+  const dots = document.querySelectorAll(".impact-dot");
+  if (!cards.length || !steps.length) return;
+
+  const activate = (slideId) => {
+    cards.forEach((card) => {
+      card.classList.toggle("is-active", card.dataset.slide === slideId);
+    });
+    dots.forEach((dot) => {
+      dot.classList.toggle("is-active", dot.dataset.slide === slideId);
+    });
+  };
+
+  // When a scroll step is in view, activate its slide
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const slideId = entry.target.dataset.slide;
+          if (slideId != null) activate(slideId);
+        }
+      });
+    },
+    {
+      threshold: 0.5,
+    }
+  );
+
+  steps.forEach((step) => observer.observe(step));
+
+  // Clicking dots scrolls to the matching step
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const slideId = dot.dataset.slide;
+      const targetStep = document.querySelector(
+        `.impact-step[data-slide="${slideId}"]`
+      );
+      if (targetStep) {
+        targetStep.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    });
+  });
+}
+
 window.addEventListener("load", () => {
   // Historic: 3 regions
   createRadialChartMulti({
@@ -405,46 +453,26 @@ window.addEventListener("load", () => {
     labelId: "ism-year-label",
     playId: "ism-play",
     series: [
-      {
-        csvFile: "ISM_historic.csv",
-        pathClass: "radial-path-ism",
-        dotClass: "radial-dot-ism",
-      },
-      {
-        csvFile: "WAM_historic.csv",
-        pathClass: "radial-path-wam",
-        dotClass: "radial-dot-wam",
-      },
-      {
-        csvFile: "SAM_historic.csv",
-        pathClass: "radial-path-sam",
-        dotClass: "radial-dot-sam",
-      },
+      { csvFile: "ISM_historic.csv", pathClass: "radial-path-ism", dotClass: "radial-dot-ism" },
+      { csvFile: "WAM_historic.csv", pathClass: "radial-path-wam", dotClass: "radial-dot-wam" },
+      { csvFile: "SAM_historic.csv", pathClass: "radial-path-sam", dotClass: "radial-dot-sam" },
     ],
   });
 
-  // Future: 3 regions (ISM, WAM, SAM)
+  // Future: 3 regions
   createRadialChartMulti({
     svgId: "ism-future-radial-svg",
     sliderId: "ism-future-year-slider",
     labelId: "ism-future-year-label",
     playId: "ism-future-play",
     series: [
-      {
-        csvFile: "ISM_future.csv",
-        pathClass: "radial-path-ism",
-        dotClass: "radial-dot-ism",
-      },
-      {
-        csvFile: "WAM_future.csv",
-        pathClass: "radial-path-wam",
-        dotClass: "radial-dot-wam",
-      },
-      {
-        csvFile: "SAM_future.csv",
-        pathClass: "radial-path-sam",
-        dotClass: "radial-dot-sam",
-      },
+      { csvFile: "ISM_future.csv", pathClass: "radial-path-ism", dotClass: "radial-dot-ism" },
+      { csvFile: "WAM_future.csv", pathClass: "radial-path-wam", dotClass: "radial-dot-wam" },
+      { csvFile: "SAM_future.csv", pathClass: "radial-path-sam", dotClass: "radial-dot-sam" },
     ],
   });
+
+  // Sticky scrollytelling research slides
+  initImpactScrolly();
 });
+
