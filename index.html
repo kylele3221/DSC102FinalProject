@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Rain layer -->
     <div class="rain"></div>
 
     <!-- HERO -->
@@ -24,6 +25,7 @@
     <!-- WHAT IS A MONSOON? -->
     <section id="monsoon-intro" class="section section-monsoon">
       <div class="monsoon-grid">
+        <!-- LEFT: text -->
         <div class="monsoon-text">
           <h2>What is a monsoon?</h2>
           <p class="monsoon-lede">
@@ -32,77 +34,107 @@
           </p>
 
           <div class="monsoon-steps">
-            <div class="monsoon-step" data-monsoon="ISM">
+            <div class="monsoon-step is-active" data-monsoon="ISM">
               <h3>Indian Summer Monsoon (ISM)</h3>
-              <p>Each summer, moist winds rush inland…</p>
+              <p>
+                Each summer, moist winds rush inland from the Indian Ocean,
+                bringing intense rains to South Asia between about 5°N and 35°N,
+                from 60°E to 100°E.
+              </p>
             </div>
 
             <div class="monsoon-step" data-monsoon="WAM">
               <h3>West African Monsoon (WAM)</h3>
-              <p>Over West Africa, the monsoon delivers rainfall…</p>
+              <p>
+                Over West Africa, the monsoon delivers rainfall to the Sahel,
+                from roughly 5°N to 20°N and 20°W to 20°E, sustaining crops and
+                river systems.
+              </p>
             </div>
 
             <div class="monsoon-step" data-monsoon="SAMS">
               <h3>South American Monsoon (SAMS)</h3>
-              <p>In South America, the monsoon system spans…</p>
+              <p>
+                In South America, the monsoon system spans the Amazon and
+                central Brazil, between about 5°N and 25°S, and 70°W to 35°W,
+                shaping one of the world’s largest rainforest regions.
+              </p>
             </div>
           </div>
         </div>
 
+        <!-- RIGHT: globe -->
         <div class="monsoon-globe-wrapper">
           <div id="monsoon-globe"></div>
         </div>
       </div>
     </section>
 
-        <!-- CLIMATE CHANGE & RAINFALL SHIFT -->
+    <!-- CLIMATE CHANGE & RAINFALL SHIFT -->
     <section id="climate-impact" class="section section-climate">
       <div class="climate-wrapper">
 
-<div id="ism-radial-block" class="radial-block">
-  <h3>Historic Monsoon Rainfall Cycle (Monsoon Regions)</h3>
-  <p class="radial-description">
-    Monthly precipitation for three monsoon regions plotted together. Use the slider
-    or Play to move through years and compare how their seasonal cycles differ.
-  </p>
+        <!-- HISTORIC RADIAL: ISM + WAM + SAM -->
+        <div id="ism-radial-block" class="radial-block">
+          <h3>Historic Monsoon Rainfall Cycle (Monsoon Regions)</h3>
+          <p class="radial-description">
+            Monthly precipitation for three monsoon regions plotted together.
+            Use the slider or Play to move through years and compare how their
+            seasonal cycles differ.
+          </p>
 
-  <div class="radial-legend">
-    <div class="radial-legend-item">
-      <span class="radial-legend-swatch legend-ism"></span>
-      <span>Indian Summer Monsoon (ISM)</span>
-    </div>
-    <div class="radial-legend-item">
-      <span class="radial-legend-swatch legend-wam"></span>
-      <span>West African Monsoon (WAM)</span>
-    </div>
-    <div class="radial-legend-item">
-      <span class="radial-legend-swatch legend-sam"></span>
-      <span>South American Monsoon (SAMS)</span>
-    </div>
-  </div>
+          <div class="radial-legend">
+            <div class="radial-legend-item">
+              <span class="radial-legend-swatch legend-ism"></span>
+              <span>Indian Summer Monsoon (ISM)</span>
+            </div>
+            <div class="radial-legend-item">
+              <span class="radial-legend-swatch legend-wam"></span>
+              <span>West African Monsoon (WAM)</span>
+            </div>
+            <div class="radial-legend-item">
+              <span class="radial-legend-swatch legend-sam"></span>
+              <span>South American Monsoon (SAMS)</span>
+            </div>
+          </div>
 
-  <div class="radial-controls">
-    <span class="radial-year-label">
-      Year: <span id="ism-year-label"></span>
-    </span>
-    <input type="range" id="ism-year-slider" />
-    <button id="ism-play" type="button">Play</button>
-  </div>
+          <div class="radial-controls">
+            <span class="radial-year-label">
+              Year: <span id="ism-year-label"></span>
+            </span>
+            <input type="range" id="ism-year-slider" />
+            <button id="ism-play" type="button">Play</button>
+          </div>
 
-  <div class="radial-svg-wrapper">
-    <svg id="ism-radial-svg"></svg>
-  </div>
-</div>
+          <div class="radial-svg-wrapper">
+            <svg id="ism-radial-svg"></svg>
+          </div>
+        </div>
 
-
-        <!-- FUTURE ISM RADIAL -->
+        <!-- FUTURE RADIAL: ISM + WAM + SAM FUTURE -->
         <div id="ism-future-radial-block" class="radial-block">
-          <h3>Future Monsoon Rainfall Projections (Indian Summer Monsoon)</h3>
+          <h3>Future Monsoon Rainfall Projections (Monsoon Regions)</h3>
           <p class="radial-description">
             The same radial view, but using future projections from climate
             models. Scroll through future years or press Play to see how the
-            seasonal pattern is expected to change.
+            seasonal pattern is expected to change across all three monsoon
+            regions.
           </p>
+
+          <div class="radial-legend">
+            <div class="radial-legend-item">
+              <span class="radial-legend-swatch legend-ism"></span>
+              <span>Indian Summer Monsoon (ISM)</span>
+            </div>
+            <div class="radial-legend-item">
+              <span class="radial-legend-swatch legend-wam"></span>
+              <span>West African Monsoon (WAM)</span>
+            </div>
+            <div class="radial-legend-item">
+              <span class="radial-legend-swatch legend-sam"></span>
+              <span>South American Monsoon (SAMS)</span>
+            </div>
+          </div>
 
           <div class="radial-controls">
             <span class="radial-year-label">
@@ -117,7 +149,7 @@
           </div>
         </div>
 
-        <!-- your original text starts here -->
+        <!-- ORIGINAL TEXT CONTENT -->
         <h2>Well, Why Does this Even Matter?</h2>
         <p class="climate-intro">
           According to NASA's Global Precipitation Measurement, rising temperatures intensify the
@@ -188,16 +220,23 @@
       </div>
     </section>
 
-
-    <!-- WRITEUP SECTION UNCHANGED -->
+    <!-- WRITEUP SECTION -->
     <section id="climate-impact" class="section section-climate">
       <div class="climate-wrapper">
         <h2>Writeup</h2>
-        <p class="climate-intro">…</p>
-        <p class="climate-intro">…</p>
+        <p class="climate-intro">
+          1. What have you done so far? 
+          So far, we have created the landing page of our project website, which has rain animation that reflects our monsoon topic. We also have created the next part, where we introduce what is a monsoon and the three specific monsoons we will focus on. We have implemented a rotating globe, in which when you click on each monsoon explanation section, the globe will rotate to the center of the monsoon. We have also created a radial plot of historic precipitation every month for years 1995~2014 to show how monsoons normally behave. Finally, we added some of the research we did on why focusing on monsoon patterns matter.
+        </p>
+        <p class="climate-intro">
+          2. What will be the most challenging of your project to design and why?
+          We believe the most challenging part of our project is to create three of everything because we are focusing on three major monsoons. Specifically, at the very end of the website we plan to have a world map with all the data, similar to our project 3. However, unlike project 3 where it did not zoom in, we are going to create a zoom in feature for all three of the monsoons and compare two SSPs. This requires a lot of data and involves a lot of interactive elements, which we believe will be the most challenging.
+        </p>
       </div>
     </section>
+    
 
+    <!-- Libraries then your script -->
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.45.0/dist/globe.gl.min.js"></script>
     <script src="main.js"></script>
