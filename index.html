@@ -59,27 +59,41 @@
     <section id="climate-impact" class="section section-climate">
       <div class="climate-wrapper">
 
-        <!-- HISTORIC ISM RADIAL -->
-        <div id="ism-radial-block" class="radial-block">
-          <h3>Historic Monsoon Rainfall Cycle (Indian Summer Monsoon)</h3>
-          <p class="radial-description">
-            Each ring shows increasing rainfall, and each spoke is a month.
-            Use the slider or press Play to see how the historic seasonal
-            cycle behaves year by year.
-          </p>
+<div id="ism-radial-block" class="radial-block">
+  <h3>Historic Monsoon Rainfall Cycle (Monsoon Regions)</h3>
+  <p class="radial-description">
+    Monthly precipitation for three monsoon regions plotted together. Use the slider
+    or Play to move through years and compare how their seasonal cycles differ.
+  </p>
 
-          <div class="radial-controls">
-            <span class="radial-year-label">
-              Year: <span id="ism-year-label"></span>
-            </span>
-            <input type="range" id="ism-year-slider" />
-            <button id="ism-play" type="button">Play</button>
-          </div>
+  <div class="radial-legend">
+    <div class="radial-legend-item">
+      <span class="radial-legend-swatch legend-ism"></span>
+      <span>Indian Summer Monsoon (ISM)</span>
+    </div>
+    <div class="radial-legend-item">
+      <span class="radial-legend-swatch legend-wam"></span>
+      <span>West African Monsoon (WAM)</span>
+    </div>
+    <div class="radial-legend-item">
+      <span class="radial-legend-swatch legend-sam"></span>
+      <span>South American Monsoon (SAMS)</span>
+    </div>
+  </div>
 
-          <div class="radial-svg-wrapper">
-            <svg id="ism-radial-svg"></svg>
-          </div>
-        </div>
+  <div class="radial-controls">
+    <span class="radial-year-label">
+      Year: <span id="ism-year-label"></span>
+    </span>
+    <input type="range" id="ism-year-slider" />
+    <button id="ism-play" type="button">Play</button>
+  </div>
+
+  <div class="radial-svg-wrapper">
+    <svg id="ism-radial-svg"></svg>
+  </div>
+</div>
+
 
         <!-- FUTURE ISM RADIAL -->
         <div id="ism-future-radial-block" class="radial-block">
