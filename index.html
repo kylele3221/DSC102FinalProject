@@ -391,33 +391,37 @@
     <!-- Impact Visualization -->
     <section class="impact-visualization">
     <div class="fatality-two-col">
-    
-    <!-- LEFT COLUMN: COUNTRY CARDS -->
-    <div class="fatality-country-list">
-      <div class="country-card" data-country="india">India</div>
-      <div class="country-card" data-country="brazil">Brazil</div>
-      <div class="country-card" data-country="niger">Niger</div>
-    </div>
   
-    <!-- RIGHT COLUMN: VISUALIZATION -->
-    <div class="fatality-viz">
-      <div class="fatality-title">Disaster Mortality Breakdown</div>
+      <!-- LEFT COLUMN: COUNTRY CARDS + LEGEND + RAW NUMBERS -->
+      <div class="fatality-left-col">
+        <div class="fatality-country-list">
+          <div class="country-card" data-country="india">India</div>
+          <div class="country-card" data-country="brazil">Brazil</div>
+          <div class="country-card" data-country="niger">Niger</div>
+        </div>
   
-      <div id="people-grid" class="people-grid"></div>
+        <div class="fatality-legend-wrapper">
+          <div class="legend-title">Disaster Mortality Breakdown</div>
   
-      <div class="legend">
-        <span><span class="legend-box flood"></span> Flood</span>
-        <span><span class="legend-box storm"></span> Storm</span>
-        <span><span class="legend-box drought"></span> Drought</span>
-        <span><span class="legend-box other"></span> Other</span>
+          <div class="legend">
+            <span><span class="legend-box flood"></span> Flood</span>
+            <span><span class="legend-box storm"></span> Storm</span>
+            <span><span class="legend-box drought"></span> Drought</span>
+            <span><span class="legend-box other"></span> Other</span>
+          </div>
+  
+          <div id="raw-numbers" class="raw-numbers"></div>
+        </div>
       </div>
   
-      <div id="raw-numbers" class="raw-numbers"></div>
+      <!-- RIGHT COLUMN: PEOPLE GRID -->
+      <div class="fatality-viz">
+        <div id="people-grid" class="people-grid"></div>
+      </div>
+  
     </div>
-  
-  </div>
-  
   </section>
+
 
 
     <!-- WRITEUP SECTION -->
