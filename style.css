@@ -768,70 +768,69 @@ html {
 }
 
 .fatality-two-col {
-  display: flex;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
 }
 
 .fatality-country-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1rem;
 }
 
 .country-card {
+  padding: 1rem 1.5rem;
+  border-radius: 0.8rem;
+  background: rgba(50,50,50,0.3);
+  color: #fff;
   cursor: pointer;
-  padding: 0.8rem 1.2rem;
-  margin-bottom: 0.6rem;
-  border-radius: 0.6rem;
-  background: #444;          /* default gray */
-  color: #f5f7ff;
   text-align: center;
-  transition: 0.25s ease;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.country-card:hover {
-  background: #555;          /* slightly lighter on hover */
-}
-
-.country-card.is-active {
-  background: var(--accent); /* active color */
+.country-card.active {
+  background: var(--accent);
   color: var(--navy);
+  transform: translateY(-2px);
+}
+
+.fatality-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fatality-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .people-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 8px;
-  width: 260px;
+  gap: 4px;
 }
 
 .person svg {
-  width: 20px;
-  height: 20px;
-  fill: #cfcfcf;
+  width: 100%;
+  height: 100%;
+  fill: #bbb; /* default gray */
 }
 
-.person.flood svg { fill: #3da9fc; }
-.person.storm svg { fill: #ef4565; }
-.person.drought svg { fill: #f4a261; }
-.person.other svg { opacity: 0.3; }
+.person.flood { fill: #4A90E2; }
+.person.storm { fill: #F5A623; }
+.person.drought { fill: #D0021B; }
+.person.other { fill: #bbb; }
 
-.legend {
-  display: flex;
-  gap: 14px;
-  margin-top: 10px;
+.raw-numbers {
+  font-weight: 600;
+  font-size: 1rem;
 }
-
-.legend-box {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  margin-right: 4px;
-  border-radius: 3px;
-}
-
-.legend-box.flood { background: #3da9fc; }
-.legend-box.storm { background: #ef4565; }
-.legend-box.drought { background: #f4a261; }
-.legend-box.other { background: #aaa; }
 
