@@ -767,121 +767,71 @@ html {
   background: transparent;
 }
 
-/* =============================
-   TWO-COLUMN FATALITY VISUAL
-   ============================= */
-
 .fatality-two-col {
-  display: grid;
-  grid-template-columns: 0.9fr 1.8fr;
-  gap: 3rem;
-  margin-top: 4rem;
-  align-items: start;
+  display: flex;
+  gap: 40px;
 }
-
-@media (max-width: 900px) {
-  .fatality-two-col {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* LEFT COLUMN — COUNTRY BOXES */
 
 .fatality-country-list {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 12px;
 }
 
 .country-card {
-  background: rgba(7, 14, 40, 0.9);
-  border: 1px solid rgba(158, 231, 255, 0.2);
-  padding: 1.3rem 1.2rem;
-  border-radius: 0.9rem;
-  font-size: 1.1rem;
+  padding: 14px 18px;
+  background: #f5f5f5;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: center;
+  font-weight: 600;
+  transition: 0.25s ease;
+  border: 2px solid transparent;
 }
 
 .country-card:hover {
-  border-color: var(--accent);
-  background: rgba(11, 22, 60, 0.95);
+  background: #e9e9e9;
 }
 
-.country-card.is-active {
-  border-color: var(--accent-strong);
-  background: rgba(15, 31, 80, 0.95);
-  transform: translateY(-2px);
-}
-
-/* RIGHT COLUMN – VISUALIZATION */
-
-.fatality-viz {
-  background: rgba(7, 14, 40, 0.9);
-  border: 1px solid rgba(158, 231, 255, 0.2);
-  padding: 2rem 1.8rem;
-  border-radius: 1rem;
-}
-
-.fatality-title {
-  font-size: 1.3rem;
-  color: var(--accent);
-  margin-bottom: 1.2rem;
+.country-card.active {
+  background: #3da9fc;
+  color: white;
+  border-color: #0f6bbd;
 }
 
 .people-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 6px;
-  margin: 20px 0 24px;
-}
-
-.person {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 8px;
+  width: 260px;
 }
 
 .person svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
+  width: 20px;
+  height: 20px;
+  fill: #cfcfcf;
 }
 
-/* Colors */
-.flood { color: #4A90E2; }
-.storm { color: #F5A623; }
-.drought { color: #D0021B; }
-.other { color: #bbb; }
+.person.flood svg { fill: #3da9fc; }
+.person.storm svg { fill: #ef4565; }
+.person.drought svg { fill: #f4a261; }
+.person.other svg { opacity: 0.3; }
 
 .legend {
   display: flex;
-  gap: 20px;
-  margin: 15px 0 10px;
-  font-size: 0.95rem;
-  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
 }
 
 .legend-box {
-  display: inline-block;
   width: 14px;
   height: 14px;
-  margin-right: 6px;
+  display: inline-block;
+  margin-right: 4px;
   border-radius: 3px;
 }
 
-.legend-box.flood { background: #4A90E2; }
-.legend-box.storm { background: #F5A623; }
-.legend-box.drought { background: #D0021B; }
-.legend-box.other { background: #bbb; }
+.legend-box.flood { background: #3da9fc; }
+.legend-box.storm { background: #ef4565; }
+.legend-box.drought { background: #f4a261; }
+.legend-box.other { background: #aaa; }
 
-/* Raw numbers — bigger & bolder */
-.raw-numbers {
-  margin-top: 20px;
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--accent-strong);
-}
