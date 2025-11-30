@@ -854,10 +854,41 @@ html {
 .person.drought svg { fill: #D0021B; }
 .person.other svg { fill: #bbb; }
 
-/* Legend */
+/* ======================
+ * Left Column Styling
+ * ====================== */
+.fatality-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Legend wrapper */
+.fatality-legend-wrapper {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  background: rgba(50, 50, 50, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Section title */
+.legend-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Legend items */
 .legend {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   font-size: 0.95rem;
   align-items: center;
@@ -881,7 +912,34 @@ html {
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.4;
+  color: var(--text-main);
 }
+
+/* Right column stays the same */
+.fatality-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* People grid */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+
+.person svg {
+  width: 100%;
+  height: 100%;
+  fill: #bbb; /* default gray */
+  transition: fill 0.3s ease;
+}
+
+.person.flood svg { fill: #4A90E2; }
+.person.storm svg { fill: #F5A623; }
+.person.drought svg { fill: #D0021B; }
+.person.other svg { fill: #bbb; }
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -893,4 +951,3 @@ html {
     grid-template-columns: repeat(10, 1fr);
   }
 }
-
