@@ -496,3 +496,75 @@ window.addEventListener("load", () => {
   initImpactScrolly();
 });
 
+/* =========================================
+ * 6. DISASTER MORTALITY PERSON VISUALIZATION
+ * =======================================*/
+window.addEventListener("load", () => {
+  const grid = document.getElementById("people-grid");
+  const rawNumbersDiv = document.getElementById("raw-numbers");
+  const select = document.getElementById("country-select");
+
+  if (!grid || !rawNumbersDiv || !select) return; // Safety check
+
+  const data = {
+    india: {
+      flood: { deaths: 60733, share: 35.1 },
+      drought: { deaths: 320, share: 0.2 },
+      storm: { deaths: 26313, share: 15.2 },
+    },
+    brazil: {
+      flood: { deaths: 5575, share: 71.3 },
+      storm: { deaths: 772, share: 9.9 },
+      drought: { deaths: 20, share: 0.3 },
+    },
+    niger: {
+      flood: { deaths: 1333, share: 11.9 },
+      storm: { deaths: 4, share: 0.0 },
+      drought: { deaths: 0, share: 0.0 },
+    }
+  };
+
+  const svgPerson = `
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2a3 3 0 110 6 3 3 0 010-6zm-.5 7h1c2.8 0 5 2.2 5 5v7h-2v-6h-1v6h-2v-6h-1v6h-2v-7c0-2.8 2.2-5 5-5z"/>
+    </svg>
+  `;
+
+  function render(country) {
+    const c = data[country];
+
+    const floodCount = Math.round(c.flood.share);
+    const stormCount = Math.round(c.storm.share);
+    const droughtCount = Math.round(c.drought.share);
+    const used = floodCount + stormCount + droughtCount;
+    const otherCount = 100 - used;
+
+    const people = [
+      ...Array(floodCount).fill("flood"),
+      ...Array(stormCount).fill("storm"),
+      ...Array(droughtCount).fill("drought"),
+      ...Array(otherCount).fill("other")
+    ];
+
+    grid.innerHTML = "";
+
+    people.forEach(type => {
+      const div = document.createElement("div");
+      div.classList.add("person", type);
+      div.innerHTML = svgPerson;
+      grid.appendChild(div);
+    });
+
+    rawNumbersDiv.innerHTML = `
+      <p><strong>Raw Death Counts:</strong></p>
+      <p>Flood: ${c.flood.deaths}</p>
+      <p>Storm: ${c.storm.deaths}</p>
+      <p>Drought: ${c.drought.deaths}</p>
+    `;
+  }
+
+  // Initial render
+  render("india");
+  select.addEventListener("change", e => render(e.target.value));
+});
+
