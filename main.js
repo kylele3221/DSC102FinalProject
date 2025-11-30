@@ -497,7 +497,6 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("load", () => {
-
   const data = {
     india: { flood: 35.1, storm: 40.2, drought: 12.5, other: 12.2 },
     brazil: { flood: 47.8, storm: 30.1, drought: 10.4, other: 11.7 },
@@ -508,31 +507,15 @@ window.addEventListener("load", () => {
   const peopleGrid = document.getElementById("people-grid");
   const rawNumbers = document.getElementById("raw-numbers");
 
-  // All gray people by default
-  function generateGrayPeople() {
-    peopleGrid.innerHTML = "";
-    for (let i = 0; i < 100; i++) {
-      const div = document.createElement("div");
-      div.classList.add("person", "other"); // gray
-      div.innerHTML = `
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="6" r="4"></circle>
-          <rect x="8" y="10" width="8" height="10" rx="3"></rect>
-        </svg>`;
-      peopleGrid.appendChild(div);
-    }
-    rawNumbers.innerHTML = "Select a country to see disaster mortality breakdown.";
-  }
-
-  // Generate colored people for selected country
   function generatePeople(countryKey) {
-    const d = data[countryKey];
     peopleGrid.innerHTML = "";
+    const d = data[countryKey];
 
-    let flood = Math.round(d.flood);
-    let storm = Math.round(d.storm);
-    let drought = Math.round(d.drought);
-    let other = 100 - (flood + storm + drought);
+    // Round percentages
+    const flood = Math.round(d.flood);
+    const storm = Math.round(d.storm);
+    const drought = Math.round(d.drought);
+    const other = 100 - (flood + storm + drought);
 
     const types = [
       ...Array(flood).fill("flood"),
@@ -553,20 +536,18 @@ window.addEventListener("load", () => {
     });
 
     rawNumbers.innerHTML = `
-      <strong>Disaster Mortality Breakdown:</strong><br>
+      <strong>Raw Death Counts:</strong><br>
       Flood: ${d.flood}%<br>
       Storm: ${d.storm}%<br>
       Drought: ${d.drought}%<br>
-      Other: ${d.other}%
+      Other: ${d.other}%<br>
     `;
   }
 
-  // Handle card clicks
   countryCards.forEach(card => {
     card.addEventListener("click", () => {
       const selected = card.dataset.country;
 
-      // Highlight active card
       countryCards.forEach(c => c.classList.remove("active"));
       card.classList.add("active");
 
@@ -574,6 +555,15 @@ window.addEventListener("load", () => {
     });
   });
 
-  // Initial state: no card active, all gray people
-  generateGrayPeople();
+  // Do NOT generate any country on load (all gray)
+  peopleGrid.innerHTML = Array(100).fill(0).map(() => `
+    <div class="person other">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="6" r="4"></circle>
+        <rect x="8" y="10" width="8" height="10" rx="3"></rect>
+      </svg>
+    </div>`).join("");
+
+  rawNumbers.innerHTML = `<strong>Raw Death Counts:</strong><br> - <br> - <br> - <br> -`;
 });
+
