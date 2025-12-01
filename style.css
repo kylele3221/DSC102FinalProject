@@ -951,3 +951,31 @@ html {
     grid-template-columns: repeat(10, 1fr);
   }
 }
+
+.collapsible {
+  background-color: #4a4a4a;
+  color: white;
+  cursor: pointer;
+  padding: 12px 20px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.collapsible:hover {
+  background-color: #5c5c5c;
+}
+
+.content-collapsible {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-out;
+}
+
+.content-collapsible p {
+  margin-bottom: 12px;
+}
