@@ -567,3 +567,23 @@ window.addEventListener("load", () => {
   rawNumbers.innerHTML = `<strong>Raw Death Counts:</strong><br> - <br> - <br> - <br> -`;
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const coll = document.querySelector(".collapsible");
+  const content = document.querySelector(".content-collapsible");
+
+  if (!coll || !content) return; // prevents errors if section isn't on the page
+
+  coll.addEventListener("click", function () {
+    this.classList.toggle("active");
+
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+      coll.innerHTML = "References ▼";
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      coll.innerHTML = "References ▲";
+    }
+  });
+});
+
+
