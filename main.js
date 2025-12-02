@@ -325,6 +325,8 @@ function createRadialChartMulti(config) {
   const seriesGraphics = seriesList.map((s) => {
     const path = document.createElementNS(NS, "path");
     path.setAttribute("class", "radial-path " + s.pathClass);
+    // start with no fill visible
+    path.style.fillOpacity = 0;
     const dots = document.createElementNS(NS, "g");
     dots.setAttribute("class", "radial-dots");
     dataGroup.appendChild(path);
@@ -355,8 +357,10 @@ function createRadialChartMulti(config) {
     tooltip.style.visibility = "hidden";
   }
 
+  // options: { animate?: true, noFill?: true }
   function drawYear(year, options) {
     const animate = options && options.animate;
+    const noFill = options && options.noFill;
 
     label.textContent = year;
 
@@ -403,28 +407,39 @@ function createRadialChartMulti(config) {
       g.path.setAttribute("d", d.trim());
 
       if (animate) {
+        // line draw animation
         try {
           const len = g.path.getTotalLength();
           g.path.style.transition = "none";
           g.path.style.strokeDasharray = `${len} ${len}`;
           g.path.style.strokeDashoffset = `${len}`;
+          g.path.style.fillOpacity = 0; // no fill yet
 
-          // Two RAFs to ensure the initial style is committed
+          // ensure initial state is applied
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              g.path.style.transition = "stroke-dashoffset 1.4s ease-out";
+              g.path.style.transition =
+                "stroke-dashoffset 1.4s ease-out, fill-opacity 0.8s ease-in";
               g.path.style.strokeDashoffset = "0";
+
+              // fade in fill after line finishes (~1.4s)
+              setTimeout(() => {
+                g.path.style.fillOpacity = 0.25; // adjust strength if you want
+              }, 1400);
             });
           });
         } catch (e) {
-          // if path length fails, just show normally
+          g.path.style.transition = "none";
           g.path.style.strokeDasharray = "";
           g.path.style.strokeDashoffset = "";
+          g.path.style.fillOpacity = 0.25;
         }
       } else {
+        // no animation: just show everything immediately
         g.path.style.transition = "none";
         g.path.style.strokeDasharray = "";
         g.path.style.strokeDashoffset = "";
+        g.path.style.fillOpacity = noFill ? 0 : 0.25;
       }
     });
   }
@@ -480,7 +495,8 @@ function createRadialChartMulti(config) {
       slider.value = years[0];
 
       createAxes();
-      drawYear(years[0]); // initial static draw
+      // initial: dots + line, but NO fill (we'll animate later)
+      drawYear(years[0], { noFill: true });
 
       // One-time animation when radial comes into view
       if ("IntersectionObserver" in window) {
@@ -510,6 +526,7 @@ function createRadialChartMulti(config) {
     })
     .catch((e) => console.error("Error loading radial CSVs:", e));
 }
+
 
 /* =========================================
  * 5. IMPACT SCROLLY
