@@ -255,7 +255,6 @@ function createRadialChartMulti(config) {
   const seriesList = config.series;
   const seriesData = seriesList.map(() => ({ dataByYear: {} }));
   let maxPr = 0;
-  let hasAnimatedOnce = false;
 
   // CSV: year,month,pr
   function parseCsv(text, idx) {
@@ -325,8 +324,7 @@ function createRadialChartMulti(config) {
   const seriesGraphics = seriesList.map((s) => {
     const path = document.createElementNS(NS, "path");
     path.setAttribute("class", "radial-path " + s.pathClass);
-    // start with no fill visible
-    path.style.fillOpacity = 0;
+    path.style.fillOpacity = 0; // start with no fill visible
     const dots = document.createElementNS(NS, "g");
     dots.setAttribute("class", "radial-dots");
     dataGroup.appendChild(path);
@@ -336,6 +334,7 @@ function createRadialChartMulti(config) {
 
   let years = [];
   let playTimer = null;
+  let isAnimating = false;
 
   function showTooltip(evt, year, monthIndex, prVal) {
     if (isNaN(prVal)) return;
@@ -357,12 +356,17 @@ function createRadialChartMulti(config) {
     tooltip.style.visibility = "hidden";
   }
 
-  // options: { animate?: true, noFill?: true }
+  // options:
+  //  { animate?: true, noFill?: true, hideStroke?: true }
   function drawYear(year, options) {
     const animate = options && options.animate;
     const noFill = options && options.noFill;
+    const hideStroke = options && options.hideStroke;
 
     label.textContent = year;
+
+    const dotBaseDelay = 150;   // ms before first dot appears
+    const dotStepDelay = 70;    // ms between dots
 
     seriesList.forEach((s, idx) => {
       const store = seriesData[idx].dataByYear;
@@ -375,7 +379,7 @@ function createRadialChartMulti(config) {
         const m = i + 1;
         const raw = months[m];
         const pr = typeof raw === "number" && !isNaN(raw) ? raw : 0;
-        const r = maxPr ? (pr / maxPr) * maxR : 0;
+        const r = maxPr ? (pr / maxR) * maxR : 0; // keep relative
         const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
         const x = cx + r * Math.cos(angle);
         const y = cy + r * Math.sin(angle);
@@ -395,6 +399,23 @@ function createRadialChartMulti(config) {
         );
         dot.addEventListener("mouseleave", hideTooltip);
 
+        if (animate) {
+          dot.style.opacity = 0;
+          dot.style.transformOrigin = "center";
+          dot.style.transform = "scale(0.2)";
+          dot.style.transition =
+            "opacity 0.3s ease-out, transform 0.3s ease-out";
+          const delay = dotBaseDelay + i * dotStepDelay;
+          setTimeout(() => {
+            dot.style.opacity = 1;
+            dot.style.transform = "scale(1)";
+          }, delay);
+        } else {
+          dot.style.opacity = 1;
+          dot.style.transform = "scale(1)";
+          dot.style.transition = "none";
+        }
+
         g.dots.appendChild(dot);
       }
 
@@ -407,7 +428,6 @@ function createRadialChartMulti(config) {
       g.path.setAttribute("d", d.trim());
 
       if (animate) {
-        // line draw animation
         try {
           const len = g.path.getTotalLength();
           g.path.style.transition = "none";
@@ -415,31 +435,68 @@ function createRadialChartMulti(config) {
           g.path.style.strokeDashoffset = `${len}`;
           g.path.style.fillOpacity = 0; // no fill yet
 
-          // ensure initial state is applied
+          const lineDuration = 1400; // ms
+          const totalAnim = lineDuration + dotBaseDelay + 11 * dotStepDelay;
+
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               g.path.style.transition =
                 "stroke-dashoffset 1.4s ease-out, fill-opacity 0.8s ease-in";
               g.path.style.strokeDashoffset = "0";
 
-              // fade in fill after line finishes (~1.4s)
+              // fade in fill after the line draws
               setTimeout(() => {
-                g.path.style.fillOpacity = 0.25; // adjust strength if you want
-              }, 1400);
+                g.path.style.fillOpacity = 0.25; // tweak strength if you want
+              }, lineDuration);
             });
           });
+
+          // mark anim over after everything is done
+          setTimeout(() => {
+            isAnimating = false;
+          }, totalAnim + 200);
         } catch (e) {
           g.path.style.transition = "none";
           g.path.style.strokeDasharray = "";
           g.path.style.strokeDashoffset = "";
           g.path.style.fillOpacity = 0.25;
+          isAnimating = false;
         }
       } else {
-        // no animation: just show everything immediately
         g.path.style.transition = "none";
+
+        if (hideStroke) {
+          try {
+            const len = g.path.getTotalLength();
+            g.path.style.strokeDasharray = `${len} ${len}`;
+            g.path.style.strokeDashoffset = `${len}`;
+          } catch {
+            g.path.style.strokeDasharray = "";
+            g.path.style.strokeDashoffset = "";
+          }
+        } else {
+          g.path.style.strokeDasharray = "";
+          g.path.style.strokeDashoffset = "";
+        }
+
+        g.path.style.fillOpacity = noFill ? 0 : 0.25;
+      }
+    });
+  }
+
+  function resetLineAndFill() {
+    // hide line & fill, keep dots as-is
+    seriesGraphics.forEach((g) => {
+      try {
+        const len = g.path.getTotalLength();
+        g.path.style.transition = "none";
+        g.path.style.strokeDasharray = `${len} ${len}`;
+        g.path.style.strokeDashoffset = `${len}`;
+        g.path.style.fillOpacity = 0;
+      } catch {
         g.path.style.strokeDasharray = "";
         g.path.style.strokeDashoffset = "";
-        g.path.style.fillOpacity = noFill ? 0 : 0.25;
+        g.path.style.fillOpacity = 0;
       }
     });
   }
@@ -452,7 +509,7 @@ function createRadialChartMulti(config) {
       const idx = years.indexOf(cur);
       const next = years[(idx + 1) % years.length];
       slider.value = next;
-      drawYear(next);
+      drawYear(next); // normal, no animation
     }, 900);
   }
 
@@ -465,7 +522,7 @@ function createRadialChartMulti(config) {
 
   slider.addEventListener("input", () => {
     stopPlay();
-    drawYear(parseInt(slider.value, 10));
+    drawYear(parseInt(slider.value, 10)); // normal, no animation
   });
 
   playBtn.addEventListener("click", () => {
@@ -495,30 +552,32 @@ function createRadialChartMulti(config) {
       slider.value = years[0];
 
       createAxes();
-      // initial: dots + line, but NO fill (we'll animate later)
-      drawYear(years[0], { noFill: true });
+      // initial: draw dots & geometry, but hide stroke & fill
+      drawYear(years[0], { noFill: true, hideStroke: true });
 
-      // One-time animation when radial comes into view
+      // Replay animation every time section re-enters view
       if ("IntersectionObserver" in window) {
         const target = document.getElementById(config.svgId);
         if (target) {
           const obs = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
-                if (
-                  entry.isIntersecting &&
-                  !hasAnimatedOnce &&
-                  years.length
-                ) {
-                  hasAnimatedOnce = true;
-                  const currentYear =
-                    parseInt(slider.value, 10) || years[0];
+                const currentYear =
+                  parseInt(slider.value, 10) || years[0];
+
+                if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+                  if (isAnimating) return;
+                  isAnimating = true;
+                  // redraw with animation (dots stagger + line draw + fill fade)
                   drawYear(currentYear, { animate: true });
-                  obs.disconnect();
+                } else if (!entry.isIntersecting) {
+                  // left viewport: reset line & fill so coming back replays
+                  resetLineAndFill();
+                  isAnimating = false;
                 }
               });
             },
-            { threshold: 0.4 }
+            { threshold: [0, 0.4, 0.6] }
           );
           obs.observe(target);
         }
@@ -526,6 +585,7 @@ function createRadialChartMulti(config) {
     })
     .catch((e) => console.error("Error loading radial CSVs:", e));
 }
+
 
 
 /* =========================================
