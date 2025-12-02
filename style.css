@@ -487,7 +487,9 @@ html {
   height: 14px;
   border-radius: 999px;
   flex-shrink: 0;
+  display: inline-block;  /* <-- this is the important new line */
 }
+
 
 .legend-ism {
   background: var(--accent-strong);
