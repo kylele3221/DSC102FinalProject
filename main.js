@@ -90,6 +90,7 @@ window.addEventListener("load", () => {
 
   const worldGlobe = Globe()(globeEl);
 
+  // Base globe style
   worldGlobe
     .globeImageUrl(
       "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -105,24 +106,28 @@ window.addEventListener("load", () => {
   mat.emissiveIntensity = 0.55;
   mat.specular = new THREE.Color("#000000");
 
+  // === MONSOON KNOBS ===
+  // all three knobs share the SAME radius + altitude
   worldGlobe
     .pointsData(monsoonPoints)
     .pointLat("lat")
     .pointLng("lng")
-    .pointAltitude(0.16)
-    .pointRadius(1)
+    .pointAltitude(0.04)          // short knob (no tall stick)
+    .pointRadius(1.0)             // BIG knob
     .pointColor((d) => d.color)
     .pointResolution(32)
     .pointLabel((d) => d.name);
 
+
+  // === PULSING RINGS ===
   worldGlobe
     .ringsData(monsoonPoints)
     .ringLat("lat")
     .ringLng("lng")
     .ringAltitude(0.01)
-    .ringMaxRadius(1.6)
-    .ringPropagationSpeed(1.5)
-    .ringRepeatPeriod(1300)
+    .ringMaxRadius(3.0)               // pulse travels farther
+    .ringPropagationSpeed(1.8)
+    .ringRepeatPeriod(1800)
     .ringColor((d) => (t) => {
       const colors = {
         ISM: "255, 179, 71",
@@ -130,7 +135,7 @@ window.addEventListener("load", () => {
         SAMS: "158, 231, 255",
       };
       const rgb = colors[d.id] || "255,255,255";
-      const alpha = 0.7 * (1 - t);
+      const alpha = 0.95 * (1 - t);    // stronger pulse
       return `rgba(${rgb}, ${alpha})`;
     });
 
@@ -153,8 +158,8 @@ window.addEventListener("load", () => {
   window.addEventListener("resize", resizeGlobe);
   resizeGlobe();
 
+  // === TEXT CARDS + CLICK HANDLERS ===
   const stepEls = document.querySelectorAll(".monsoon-step");
-  let activeMonsoonId = "ISM";
   let autoRotateStopped = false;
 
   function setActiveCard(id) {
@@ -174,8 +179,6 @@ window.addEventListener("load", () => {
     const region = monsoonPoints.find((r) => r.id === id);
     if (!region) return;
 
-    activeMonsoonId = id;
-
     worldGlobe.pointOfView(
       {
         lat: region.lat,
@@ -183,10 +186,6 @@ window.addEventListener("load", () => {
         altitude: INITIAL_ALT,
       },
       animate ? 1000 : 0
-    );
-
-    worldGlobe.pointAltitude((d) =>
-      d.id === activeMonsoonId ? 0.22 : 0.16
     );
 
     setActiveCard(id);
@@ -206,8 +205,10 @@ window.addEventListener("load", () => {
     focusMonsoon(d.id, true);
   });
 
+  // initial state
   focusMonsoon("ISM", false);
 });
+
 
 /* =========================================
  * 4. RADIAL CHART – HISTORIC ONLY

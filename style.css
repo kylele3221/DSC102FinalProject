@@ -232,10 +232,22 @@ html {
 }
 
 .monsoon-step.is-active {
-  border-color: var(--accent-strong);
   background: rgba(15, 31, 80, 0.95);
   transform: translateY(-2px);
 }
+
+.monsoon-step.is-active[data-monsoon="ISM"] {
+  border-color: #ffb347;  /* ISM knob color */
+}
+
+.monsoon-step.is-active[data-monsoon="WAM"] {
+  border-color: #ff6b6b;  /* WAM knob color */
+}
+
+.monsoon-step.is-active[data-monsoon="SAMS"] {
+  border-color: #9ee7ff;  /* SAM(S) knob color */
+}
+
 
 /* GLOBE COLUMN – BIG 2D-ISH GLOBE */
 .monsoon-globe-wrapper {
