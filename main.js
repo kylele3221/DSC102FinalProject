@@ -210,7 +210,7 @@ window.addEventListener("load", () => {
 });
 
 /* =========================================
- * 5. RADIAL CHARTS (HISTORIC + FUTURE)
+ * 4. RADIAL CHART – HISTORIC ONLY
  * =======================================*/
 
 function createRadialChartMulti(config) {
@@ -228,6 +228,7 @@ function createRadialChartMulti(config) {
   const maxR = 140;
   svg.setAttribute("viewBox", "0 0 " + width + " " + height);
 
+  // Tooltip (one per page)
   let tooltip = document.querySelector(".radial-tooltip");
   if (!tooltip) {
     tooltip = document.createElement("div");
@@ -246,7 +247,10 @@ function createRadialChartMulti(config) {
     document.body.appendChild(tooltip);
   }
 
-  const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const monthNames = [
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
+  ];
 
   const seriesList = config.series;
   const seriesData = seriesList.map(() => ({ dataByYear: {} }));
@@ -451,6 +455,9 @@ function createRadialChartMulti(config) {
     .catch((e) => console.error("Error loading radial CSVs:", e));
 }
 
+/* =========================================
+ * 5. IMPACT SCROLLY
+ * =======================================*/
 
 function initImpactScrolly() {
   const cards = document.querySelectorAll(".impact-viewport .impact-card");
@@ -499,7 +506,12 @@ function initImpactScrolly() {
   });
 }
 
+/* =========================================
+ * 6. INIT – RADIAL + SCROLLY
+ * =======================================*/
+
 window.addEventListener("load", () => {
+  // Historic monsoon radial only
   createRadialChartMulti({
     svgId: "ism-radial-svg",
     sliderId: "ism-year-slider",
@@ -510,52 +522,26 @@ window.addEventListener("load", () => {
         csvFile: "ISM_historic.csv",
         pathClass: "radial-path-ism",
         dotClass: "radial-dot-ism",
-        name: "Indian Summer Monsoon",
       },
       {
         csvFile: "WAM_historic.csv",
         pathClass: "radial-path-wam",
         dotClass: "radial-dot-wam",
-        name: "West African Monsoon",
       },
       {
         csvFile: "SAM_historic.csv",
         pathClass: "radial-path-sam",
         dotClass: "radial-dot-sam",
-        name: "South American Monsoon",
-      },
-    ],
-  });
-
-  createRadialChartMulti({
-    svgId: "ism-future-radial-svg",
-    sliderId: "ism-future-year-slider",
-    labelId: "ism-future-year-label",
-    playId: "ism-future-play",
-    series: [
-      {
-        csvFile: "ISM_future.csv",
-        pathClass: "radial-path-ism",
-        dotClass: "radial-dot-ism",
-        name: "Indian Summer Monsoon",
-      },
-      {
-        csvFile: "WAM_future.csv",
-        pathClass: "radial-path-wam",
-        dotClass: "radial-dot-wam",
-        name: "West African Monsoon",
-      },
-      {
-        csvFile: "SAM_future.csv",
-        pathClass: "radial-path-sam",
-        dotClass: "radial-dot-sam",
-        name: "South American Monsoon",
       },
     ],
   });
 
   initImpactScrolly();
 });
+
+/* =========================================
+ * 7. FATALITY PEOPLE-GRID
+ * =======================================*/
 
 window.addEventListener("load", () => {
   const data = {
@@ -621,6 +607,7 @@ window.addEventListener("load", () => {
     });
   });
 
+  // Default state (empty people, dashes)
   peopleGrid.innerHTML = Array(100)
     .fill(0)
     .map(
@@ -636,6 +623,10 @@ window.addEventListener("load", () => {
 
   rawNumbers.innerHTML = `<strong>Raw Death Counts:</strong><br> - <br> - <br> - <br> -`;
 });
+
+/* =========================================
+ * 8. REFERENCES COLLAPSIBLE
+ * =======================================*/
 
 document.addEventListener("DOMContentLoaded", function () {
   const coll = document.querySelector(".collapsible");
