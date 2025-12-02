@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+A<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,23 +9,6 @@
   <body>
     <!-- Rain layer -->
     <div class="rain"></div>
-
-    <!-- Tooltip for radial charts -->
-    <div
-      id="radial-tooltip"
-      style="
-        position: fixed;
-        pointer-events: none;
-        background: rgba(0, 0, 0, 0.88);
-        color: #fff;
-        padding: 6px 10px;
-        border-radius: 6px;
-        font-size: 12px;
-        z-index: 9999;
-        opacity: 0;
-        white-space: nowrap;
-      "
-    ></div>
 
     <!-- Top-right Writeup button -->
     <a href="#writeup" class="writeup-button">Writeup</a>
@@ -129,44 +112,6 @@
             <svg id="ism-radial-svg"></svg>
           </div>
         </div>
-
-        <!-- FUTURE RADIAL: ISM + WAM + SAM FUTURE -->
-        <div id="ism-future-radial-block" class="radial-block">
-          <h3>Future Monsoon Rainfall Projections (Monsoon Regions)</h3>
-          <p class="radial-description">
-            The same radial view, but using future projections from climate
-            models. Scroll through future years or press Play to see how the
-            seasonal pattern is expected to change across all three monsoon
-            regions.
-          </p>
-
-          <div class="radial-legend">
-            <div class="radial-legend-item">
-              <span class="radial-legend-swatch legend-ism"></span>
-              <span>Indian Summer Monsoon (ISM)</span>
-            </div>
-            <div class="radial-legend-item">
-              <span class="radial-legend-swatch legend-wam"></span>
-              <span>West African Monsoon (WAM)</span>
-            </div>
-            <div class="radial-legend-item">
-              <span class="radial-legend-swatch legend-sam"></span>
-              <span>South American Monsoon (SAMS)</span>
-            </div>
-          </div>
-
-          <div class="radial-controls">
-            <span class="radial-year-label">
-              Year: <span id="ism-future-year-label"></span>
-            </span>
-            <input type="range" id="ism-future-year-slider" />
-            <button id="ism-future-play" type="button">Play</button>
-          </div>
-
-          <div class="radial-svg-wrapper">
-            <svg id="ism-future-radial-svg"></svg>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -199,6 +144,8 @@
         </div>
       </div>
     </section>
+
+
 
     <!-- FULL-WIDTH SCROLLY RESEARCH SECTION -->
     <section id="impact-research" class="section section-impact">
@@ -405,37 +352,39 @@
 
     <!-- Impact Visualization -->
     <section class="impact-visualization">
-      <div class="fatality-two-col">
-        <!-- LEFT COLUMN: COUNTRY CARDS + LEGEND + RAW NUMBERS -->
-        <div class="fatality-left-col">
-          <div class="fatality-country-list">
-            <div class="country-card" data-country="india">India</div>
-            <div class="country-card" data-country="brazil">Brazil</div>
-            <div class="country-card" data-country="niger">Niger</div>
-          </div>
-
-          <div class="fatality-legend-wrapper">
-            <div class="legend-title">
-              Natural Disaster Mortality Breakdown: 1980-2024 (EM-DAT Data)
-            </div>
-
-            <div class="legend">
-              <span><span class="legend-box flood"></span> Flood</span>
-              <span><span class="legend-box storm"></span> Storm</span>
-              <span><span class="legend-box drought"></span> Drought</span>
-              <span><span class="legend-box other"></span> Other</span>
-            </div>
-
-            <div id="raw-numbers" class="raw-numbers"></div>
-          </div>
+    <div class="fatality-two-col">
+  
+      <!-- LEFT COLUMN: COUNTRY CARDS + LEGEND + RAW NUMBERS -->
+      <div class="fatality-left-col">
+        <div class="fatality-country-list">
+          <div class="country-card" data-country="india">India</div>
+          <div class="country-card" data-country="brazil">Brazil</div>
+          <div class="country-card" data-country="niger">Niger</div>
         </div>
-
-        <!-- RIGHT COLUMN: PEOPLE GRID -->
-        <div class="fatality-viz">
-          <div id="people-grid" class="people-grid"></div>
+  
+        <div class="fatality-legend-wrapper">
+          <div class="legend-title">Natural Disaster Mortality Breakdown: 1980-2024 (EM-DAT Data)</div>
+  
+          <div class="legend">
+            <span><span class="legend-box flood"></span> Flood</span>
+            <span><span class="legend-box storm"></span> Storm</span>
+            <span><span class="legend-box drought"></span> Drought</span>
+            <span><span class="legend-box other"></span> Other</span>
+          </div>
+  
+          <div id="raw-numbers" class="raw-numbers"></div>
         </div>
       </div>
-    </section>
+  
+      <!-- RIGHT COLUMN: PEOPLE GRID -->
+      <div class="fatality-viz">
+        <div id="people-grid" class="people-grid"></div>
+      </div>
+  
+    </div>
+  </section>
+
+
 
     <!-- WRITEUP SECTION -->
     <section id="writeup" class="section section-climate">
@@ -467,82 +416,68 @@
         </p>
       </div>
     </section>
-
     <!-- REFERENCES SECTION -->
     <section id="references" class="section section-climate">
       <div class="climate-wrapper">
+    
         <!-- Collapsible Header -->
         <button class="collapsible">References ▼</button>
-
+    
         <!-- Collapsible Content -->
         <div class="content-collapsible">
           <p class="climate-intro">
-            Eekhout, J., Hunink, J., Terink, W., & de Vente, J. (2018). Why
-            increased extreme precipitation under climate change negatively
-            affects water security.
-            <em>Hydrology and Earth System Sciences, 22</em>(11), 5935–5946.
-            doi.org
+            Eekhout, J., Hunink, J., Terink, W., & de Vente, J. (2018). Why increased extreme
+            precipitation under climate change negatively affects water security.
+            <em>Hydrology and Earth System Sciences, 22</em>(11), 5935–5946. doi.org
           </p>
-
+    
           <p class="climate-intro">
-            Gao, D., Chen, A., Marthews, T., & Memon, F. (2024). Evaluating
-            future hydrological changes in China under climate change
-            [Preprint]. doi.org
+            Gao, D., Chen, A., Marthews, T., & Memon, F. (2024). Evaluating future hydrological 
+            changes in China under climate change [Preprint]. doi.org
           </p>
-
+    
           <p class="climate-intro">
-            National Aeronautics and Space Administration. (n.d.). How does
-            climate change affect precipitation? NASA Global Precipitation
-            Measurement Mission. gpm.nasa.gov
+            National Aeronautics and Space Administration. (n.d.). How does climate change affect precipitation?
+            NASA Global Precipitation Measurement Mission. gpm.nasa.gov
           </p>
-
+    
           <p class="climate-intro">
-            Qing, Y., Wang, S., Yang, Z.-L., & Gentine, P. (2023). Soil
-            moisture–atmosphere feedbacks have triggered the shifts from drought
-            to pluvial conditions since 1980.
+            Qing, Y., Wang, S., Yang, Z.-L., & Gentine, P. (2023). Soil moisture–atmosphere 
+            feedbacks have triggered the shifts from drought to pluvial conditions since 1980.
             <em>Communications Earth & Environment, 4</em>(1), 1–11. doi.org
           </p>
-
+    
           <p class="climate-intro">
-            Turner, S., Chevuturi, A., Chan, W., Barker, L. J., Tanguy, M.,
-            Parry, S., & Allen, S. (2025). Have river flow droughts become more
-            severe? A review of the evidence from the UK.
-            <em>Hydrology and Earth System Sciences, 29</em>(19), 4371–4394.
-            doi.org
+            Turner, S., Chevuturi, A., Chan, W., Barker, L. J., Tanguy, M., Parry, S., & Allen, S. (2025).
+            Have river flow droughts become more severe? A review of the evidence from the UK.
+            <em>Hydrology and Earth System Sciences, 29</em>(19), 4371–4394. doi.org
           </p>
-
+    
           <p class="climate-intro">
-            Wang, X.-Y., Bao, X.-Y., Huang, Y., Li, Z.-W., Yong, J.-H., Wu,
-            Y.-P., Feng, G.-L., & Sun, G.-Q. (2023). Physical explanation for
-            paradoxical climate change in semi-arid inland Eurasia.
+            Wang, X.-Y., Bao, X.-Y., Huang, Y., Li, Z.-W., Yong, J.-H., Wu, Y.-P., Feng, G.-L., & Sun, G.-Q.
+            (2023). Physical explanation for paradoxical climate change in semi-arid inland Eurasia.
             <em>Atmosphere, 14</em>(2), 376. doi.org
           </p>
-
+    
           <p class="climate-intro">
-            Xiong, J., Guo, S., Abhishek, A., Chen, J., & Yin, J. (2022). Global
-            evaluation of the “dry gets drier, and wet gets wetter” paradigm.
-            <em>Hydrology and Earth System Sciences, 26</em>(24), 6457–6476.
-            doi.org
+            Xiong, J., Guo, S., Abhishek, A., Chen, J., & Yin, J. (2022). Global evaluation of the 
+            “dry gets drier, and wet gets wetter” paradigm.
+            <em>Hydrology and Earth System Sciences, 26</em>(24), 6457–6476. doi.org
           </p>
-
+    
           <p class="climate-intro">
-            World Bank Group. (n.d.).
-            <em>Brazil - Historical natural disasters</em>. Climate Change
-            Knowledge Portal.
+            World Bank Group. (n.d.). <em>Brazil - Historical natural disasters</em>. Climate Change Knowledge Portal.
           </p>
-
+    
           <p class="climate-intro">
-            World Bank Group. (n.d.).
-            <em>India - Historical natural disasters</em>. Climate Change
-            Knowledge Portal.
+            World Bank Group. (n.d.). <em>India - Historical natural disasters</em>. Climate Change Knowledge Portal.
           </p>
-
+    
           <p class="climate-intro">
-            World Bank Group. (n.d.).
-            <em>Niger - Historical natural disasters</em>. Climate Change
-            Knowledge Portal.
+            World Bank Group. (n.d.). <em>Niger - Historical natural disasters</em>. Climate Change Knowledge Portal.
           </p>
         </div>
+    
       </div>
     </section>
 
@@ -551,124 +486,104 @@
     <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.45.0/dist/globe.gl.min.js"></script>
     <script src="main.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const ism = document.getElementById("ism-slideshow-frame");
-        const wam = document.getElementById("wam-slideshow-frame");
-        const sam = document.getElementById("sam-slideshow-frame");
+    document.addEventListener("DOMContentLoaded", () => {
+      const ism    = document.getElementById("ism-slideshow-frame");
+      const wam    = document.getElementById("wam-slideshow-frame");
+      const sam    = document.getElementById("sam-slideshow-frame");
 
-        const ismCap = document.getElementById("ism-slideshow-caption");
-        const wamCap = document.getElementById("wam-slideshow-caption");
-        const samCap = document.getElementById("sam-slideshow-caption");
+      const ismCap = document.getElementById("ism-slideshow-caption");
+      const wamCap = document.getElementById("wam-slideshow-caption");
+      const samCap = document.getElementById("sam-slideshow-caption");
 
-        // Decades you have data for
-        const decades = [
-          "1850s",
-          "1860s",
-          "1870s",
-          "1880s",
-          "1890s",
-          "1900s",
-          "1910s",
-          "1920s",
-          "1930s",
-          "1940s",
-          "1950s",
-          "1960s",
-          "1970s",
-          "1980s",
-          "1990s",
-          "2000s",
-          "2010s",
-          "2020s",
-          "2030s",
-          "2050s",
-          "2060s",
-          "2070s",
-          "2080s",
-          "2090s",
-          "2100s"
-        ];
+      // Decades you have data for
+      const decades = [
+        "1850s","1860s","1870s","1880s","1890s",
+        "1900s","1910s","1920s","1930s","1940s",
+        "1950s","1960s","1970s","1980s","1990s",
+        "2000s","2010s","2020s","2030s","2050s",
+        "2060s","2070s","2080s","2090s","2100s"
+      ];
 
-        // Monsoon-season months (using 3-letter codes from filenames)
-        const ISM_MONTHS = ["Jun", "Jul", "Aug", "Sep"]; // June–September
-        const SAMS_MONTHS = ["Jun", "Jul", "Aug", "Sep"]; // June–September
-        const WAM_MONTHS = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]; // Oct–Mar
+      // Monsoon-season months (using 3-letter codes from filenames)
+      const ISM_MONTHS  = ["Jun","Jul","Aug","Sep"];              // June–September
+      const SAMS_MONTHS = ["Jun","Jul","Aug","Sep"];              // June–September
+      const WAM_MONTHS  = ["Oct","Nov","Dec","Jan","Feb","Mar"];  // October–March
 
-        // Optional pretty labels
-        const MONTH_LABEL = {
-          Jan: "January",
-          Feb: "February",
-          Mar: "March",
-          Apr: "April",
-          May: "May",
-          Jun: "June",
-          Jul: "July",
-          Aug: "August",
-          Sep: "September",
-          Oct: "October",
-          Nov: "November",
-          Dec: "December"
-        };
+      // Optional pretty labels (can tweak if you want “September” instead of “Sep”)
+      const MONTH_LABEL = {
+        Jan: "January",
+        Feb: "February",
+        Mar: "March",
+        Apr: "April",
+        May: "May",
+        Jun: "June",
+        Jul: "July",
+        Aug: "August",
+        Sep: "September",
+        Oct: "October",
+        Nov: "November",
+        Dec: "December"
+      };
 
-        const BASE = "monsoon/"; // index.html and monsoon/ are siblings
+      const BASE = "monsoon/"; // index.html and monsoon/ are siblings
 
-        function buildFrames(monthsArray) {
-          const frames = [];
-          for (const decade of decades) {
-            for (const m of monthsArray) {
-              frames.push({ month: m, decade });
-            }
+      // Build [ {month, decade}, ... ] in the order you want:
+      // 1850s Jun, 1850s Jul, 1850s Aug, 1850s Sep, 1860s Jun, ...
+      function buildFrames(monthsArray) {
+        const frames = [];
+        for (const decade of decades) {
+          for (const m of monthsArray) {
+            frames.push({ month: m, decade });
           }
-          return frames;
         }
+        return frames;
+      }
 
-        const framesISM = buildFrames(ISM_MONTHS);
-        const framesSAMS = buildFrames(SAMS_MONTHS);
-        const framesWAM = buildFrames(WAM_MONTHS);
+      const framesISM  = buildFrames(ISM_MONTHS);
+      const framesSAMS = buildFrames(SAMS_MONTHS);
+      const framesWAM  = buildFrames(WAM_MONTHS);
 
-        let idxISM = 0;
-        let idxWAM = 0;
-        let idxSAMS = 0;
+      let idxISM = 0;
+      let idxWAM = 0;
+      let idxSAMS = 0;
 
-        const SPEED = 1500; // ms per step
+      const SPEED = 1500; // ms per step; change if too fast/slow
 
-        function show() {
-          const fISM = framesISM[idxISM];
-          const fWAM = framesWAM[idxWAM];
-          const fSAMS = framesSAMS[idxSAMS];
+      function show() {
+        const fISM  = framesISM[idxISM];
+        const fWAM  = framesWAM[idxWAM];
+        const fSAMS = framesSAMS[idxSAMS];
 
-          const ismPath = `${BASE}ISM/ISM_${fISM.month}_${fISM.decade}.png`;
-          const wamPath = `${BASE}WAM/WAM_${fWAM.month}_${fWAM.decade}.png`;
-          const samsPath = `${BASE}SAMS/SAMS_${fSAMS.month}_${fSAMS.decade}.png`;
+        // Build file paths according to your naming convention
+        const ismPath  = `${BASE}ISM/ISM_${fISM.month}_${fISM.decade}.png`;
+        const wamPath  = `${BASE}WAM/WAM_${fWAM.month}_${fWAM.decade}.png`;
+        const samsPath = `${BASE}SAMS/SAMS_${fSAMS.month}_${fSAMS.decade}.png`;
 
-          console.log("ISM:", ismPath, "WAM:", wamPath, "SAMS:", samsPath);
+        console.log("ISM:", ismPath, "WAM:", wamPath, "SAMS:", samsPath);
 
-          ism.src = ismPath;
-          wam.src = wamPath;
-          sam.src = samsPath;
+        ism.src = ismPath;
+        wam.src = wamPath;
+        sam.src = samsPath;
 
-          ismCap.textContent = `${
-            MONTH_LABEL[fISM.month] || fISM.month
-          } · Indian Summer Monsoon – ${fISM.decade}`;
-          wamCap.textContent = `${
-            MONTH_LABEL[fWAM.month] || fWAM.month
-          } · West African Monsoon – ${fWAM.decade}`;
-          samCap.textContent = `${
-            MONTH_LABEL[fSAMS.month] || fSAMS.month
-          } · South American Monsoon – ${fSAMS.decade}`;
-        }
+        ismCap.textContent  = `${MONTH_LABEL[fISM.month] || fISM.month} · Indian Summer Monsoon – ${fISM.decade}`;
+        wamCap.textContent  = `${MONTH_LABEL[fWAM.month] || fWAM.month} · West African Monsoon – ${fWAM.decade}`;
+        samCap.textContent  = `${MONTH_LABEL[fSAMS.month] || fSAMS.month} · South American Monsoon – ${fSAMS.decade}`;
+      }
 
-        // Initial frame
+      // Initial frame
+      show();
+
+      // Advance each monsoon through its own full (month, decade) sequence
+      setInterval(() => {
+        idxISM  = (idxISM  + 1) % framesISM.length;
+        idxWAM  = (idxWAM  + 1) % framesWAM.length;
+        idxSAMS = (idxSAMS + 1) % framesSAMS.length;
         show();
-
-        // Advance each monsoon
-        setInterval(() => {
-          idxISM = (idxISM + 1) % framesISM.length;
-          idxWAM = (idxWAM + 1) % framesWAM.length;
-          idxSAMS = (idxSAMS + 1) % framesSAMS.length;
-          show();
-        }, SPEED);
-      });
+      }, SPEED);
+    });
     </script>
+
+
+
   </body>
 </html>
